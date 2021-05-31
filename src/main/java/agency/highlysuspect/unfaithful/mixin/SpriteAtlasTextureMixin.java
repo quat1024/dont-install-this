@@ -49,7 +49,7 @@ public class SpriteAtlasTextureMixin {
 			target = "Lnet/minecraft/client/texture/NativeImage;read(Ljava/io/InputStream;)Lnet/minecraft/client/texture/NativeImage;"
 		)
 	)
-	public NativeImage upscaleImage(NativeImage image) {
-		return UpscaleUtil.upscaleNativeImage(image);
+	public NativeImage upscaleImage(NativeImage image, ResourceManager container, Sprite.Info info, int atlasWidth, int atlasHeight, int maxLevel, int x, int y) {
+		return UpscaleUtil.upscaleNativeImage(image, info);
 	}
 }

@@ -1,26 +1,29 @@
 package agency.highlysuspect.unfaithful.upscale;
 
+import agency.highlysuspect.unfaithful.UnfaithfulSettings;
 import net.minecraft.client.texture.NativeImage;
 
 public abstract class Upscaler {
 	protected abstract void writeUpscalePixels(Sampler in, NativeImage out, int outX, int outY);
 	public abstract int scaleFactor();
 	
-	public NativeImage upscaleAndFree(NativeImage in) {
-		NativeImage out = upscale(in);
+	public NativeImage upscaleAndFree(NativeImage in, UnfaithfulSettings settings) {
+		NativeImage out = upscale(in, settings);
 		in.close();
 		return out;
 	}
 	
-	public NativeImage upscale(NativeImage in) {
+	public NativeImage upscale(NativeImage in, UnfaithfulSettings settings) {
 		NativeImage out = new NativeImage(in.getWidth() * scaleFactor(), in.getHeight() * scaleFactor(), false);
+		
+		Sampler sampler = settings.clamp ? Sampler.clamping(in) : Sampler.wrapping(in);
 		
 		for(int inX = 0; inX < in.getWidth(); inX++) {
 			for(int inY = 0; inY < in.getHeight(); inY++) {
-				//todo: this is cute, but slow
-				Sampler sampler = Sampler.wrapping(in).offset(inX, inY);
+				//todo: cute but slow; maybe have a sampler i can move around with setX and setY
+				Sampler offsetSampler = sampler.offset(inX, inY);
 				
-				writeUpscalePixels(sampler, out, inX * 2, inY * 2);
+				writeUpscalePixels(offsetSampler, out, inX * 2, inY * 2);
 			}
 		}
 		
