@@ -4,7 +4,9 @@ heyyyyyyyy, i don't wanna see you un faith ful
 
 rewrite of asie's old [FaithlessMC](https://github.com/asiekierka/FaithlessMC) for fabric 1.16.5.
 
-Automatically upscales every texture in the game using scale2x.
+Automatically upscales every texture in the game using ~~scale2x~~ 2xbr
+
+Not done yet!
 
 ## license
 
@@ -58,3 +60,18 @@ Possible avenues:
 * Avenues that require some feedback from the model renderer:
 	* upscale each face of each cube individually.
 	* upscale each cube, taking into account the way textures wrap around the edge of the cube
+	
+## Known issues
+
+* The aforementioned shortcoming with entity models
+* Blocks with detailed models might get messed up
+* Animated textures don't upscale each piece individually
+* Beds look weird
+* Cobblestone, in particular, looks like crap for some reason (i think: just unlucky)
+
+## Wishlist
+
+* Needs a config file lol
+* Scale fonts
+* Scale entity textures
+* Scale player skins?
