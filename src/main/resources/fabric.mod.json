@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "unfaithful",
+  "version": "${version}",
+
+  "name": "Unfaithful",
+  "description": "Automatically upscales textures",
+  "authors": [
+    "quaternary", "asiekierka"
+  ],
+  "contact": {
+    "homepage": "https://highlysuspect.agency/"
+  },
+
+  "license": "LGPL-3.0-or-later",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "agency.highlysuspect.unfaithful.Init"
+    ]
+  },
+  "mixins": [
+    "unfaithful.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

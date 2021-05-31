@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "agency.highlysuspect.unfaithful.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+		"SpriteAtlasTextureMixin",
+		"SpriteInfoMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
