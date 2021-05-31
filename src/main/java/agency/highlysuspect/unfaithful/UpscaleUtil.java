@@ -1,6 +1,7 @@
 package agency.highlysuspect.unfaithful;
 
 import agency.highlysuspect.unfaithful.upscale.Epx;
+import agency.highlysuspect.unfaithful.upscale.Xbr;
 import agency.highlysuspect.unfaithful.util.SpriteInfoExt;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.Sprite;
@@ -21,7 +22,7 @@ public class UpscaleUtil {
 	}
 	
 	public static NativeImage upscaleNativeImage(NativeImage original) {
-		NativeImage upscaled = Epx.upscale(original);
+		NativeImage upscaled = Xbr.upscale(original);
 		original.close(); //Free the original image
 		return upscaled;
 	}

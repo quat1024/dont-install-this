@@ -1,13 +1,10 @@
 package agency.highlysuspect.unfaithful.upscale;
 
-import agency.highlysuspect.unfaithful.Init;
 import net.minecraft.client.texture.NativeImage;
 
 public class Epx {
 	public static NativeImage upscale(NativeImage input) {
-		if(Init.config.scaleFactor != 2) throw new RuntimeException("epx only scales by 2x, not by " + Init.config.scaleFactor);
-		
-		NativeImage output = new NativeImage(input.getWidth() * Init.config.scaleFactor, input.getHeight() * Init.config.scaleFactor, false);
+		NativeImage output = new NativeImage(input.getWidth() * 2, input.getHeight() * 2, false);
 		
 		for(int inX = 0; inX < input.getWidth(); inX++) {
 			for(int inY = 0; inY < input.getHeight(); inY++) {
