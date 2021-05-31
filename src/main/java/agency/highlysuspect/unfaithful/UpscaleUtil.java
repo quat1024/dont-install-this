@@ -29,6 +29,6 @@ public class UpscaleUtil {
 		UnfaithfulSettings settings = ext.getUnfaithfulSettings();
 		if(settings == null) return original;
 		
-		return Init.config.upscaler.upscaleAndFree(original, settings);
+		return Init.config.upscaler.upscaleAndFree(original, settings, info);
 	}
 }
