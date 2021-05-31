@@ -1,5 +1,8 @@
 package agency.highlysuspect.unfaithful;
 
+import agency.highlysuspect.unfaithful.upscale.algo.Epx;
+import agency.highlysuspect.unfaithful.upscale.Upscaler;
+
 public class Config {
-	public int scaleFactor = 2;
+	public Upscaler upscaler = Epx.DEFAULT;
 }

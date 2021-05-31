@@ -1,4 +1,4 @@
-package agency.highlysuspect.unfaithful.upscale;
+package agency.highlysuspect.unfaithful.upscale.algo;
 
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.util.math.MathHelper;
