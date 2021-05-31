@@ -18,6 +18,6 @@ public class UpscaleUtil {
 	}
 	
 	public static NativeImage upscaleNativeImage(NativeImage original) {
-		return Epx.DEFAULT.upscaleAndFree(original);
+		return Init.config.upscaler.upscaleAndFree(original);
 	}
 }
