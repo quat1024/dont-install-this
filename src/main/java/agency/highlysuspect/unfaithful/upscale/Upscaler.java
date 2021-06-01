@@ -1,10 +1,9 @@
 package agency.highlysuspect.unfaithful.upscale;
 
-import agency.highlysuspect.unfaithful.UnfaithfulSettings;
-import agency.highlysuspect.unfaithful.util.SpriteInfoExt;
-import net.minecraft.client.resource.metadata.AnimationResourceMetadata;
+import agency.highlysuspect.unfaithful.Init;
+import agency.highlysuspect.unfaithful.Settings;
 import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.Sprite;
+import net.minecraft.util.Identifier;
 
 import java.util.function.BiFunction;
 
@@ -12,21 +11,23 @@ public abstract class Upscaler {
 	protected abstract void writeUpscalePixels(Sampler in, NativeImage out, int outX, int outY);
 	public abstract int scaleFactor();
 	
-	public NativeImage upscaleAndFree(NativeImage in, UnfaithfulSettings settings, Sprite.Info info) {
-		NativeImage out = upscale(in, settings, info);
+	public NativeImage upscaleAndFree(NativeImage in, Identifier id) {
+		NativeImage out = upscale(in, id);
 		in.close();
 		return out;
 	}
 	
-	public NativeImage upscale(NativeImage in, UnfaithfulSettings settings, Sprite.Info info) {
+	public NativeImage upscale(NativeImage in, Identifier id) {
 		NativeImage out = new NativeImage(in.getWidth() * scaleFactor(), in.getHeight() * scaleFactor(), false);
 		
-		BiFunction<NativeImage, Boolean, Sampler> sampMaker = settings.clamp ? Sampler.Clamping::new : Sampler.Wrapping::new;
+		Settings yeah = Init.config.rules.getSettingsFor(id);
+		BiFunction<NativeImage, Boolean, Sampler> sampMaker = yeah.clamp ? Sampler.Clamping::new : Sampler.Wrapping::new;
 		
-		AnimationResourceMetadata arm = SpriteInfoExt.cast(info).getAnimationResourceMetadata();
-		boolean animated = arm != null && arm != AnimationResourceMetadata.EMPTY && arm.getFrameCount() > 1;
+		//AnimationResourceMetadata arm = SpriteInfoExt.cast(info).getAnimationResourceMetadata();
+		//boolean animated = arm != null && arm != AnimationResourceMetadata.EMPTY && arm.getFrameCount() > 1;
 		
-		Sampler sampler = sampMaker.apply(in, animated);
+		Sampler sampler = sampMaker.apply(in, false); //todo animated
+		//Sampler sampler = new Sampler.Clamping(in, false);
 		
 		for(int inX = 0; inX < in.getWidth(); inX++) {
 			for(int inY = 0; inY < in.getHeight(); inY++) {

@@ -4,8 +4,11 @@
   "package": "agency.highlysuspect.unfaithful.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-		"SpriteAtlasTextureMixin",
-		"SpriteInfoMixin"
+		"ClientBuiltinResourcePackProviderMixin",
+		"ReloadableResourceManagerImplMixin",
+		"NamespaceResourceManagerMixin",
+		"ResourceImplMixin",
+		"NativeImageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
