@@ -12,6 +12,6 @@ public class Config {
 		rules = Rules.readRules(path);
 	}
 	
-	public Upscaler upscaler = Epx.DEFAULT;
+	public Upscaler upscaler = Xbr.INSTANCE;
 	public Rules rules;
 }
