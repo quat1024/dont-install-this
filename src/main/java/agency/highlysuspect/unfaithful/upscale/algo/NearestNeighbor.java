@@ -1,6 +1,6 @@
 package agency.highlysuspect.unfaithful.upscale.algo;
 
-import agency.highlysuspect.unfaithful.upscale.Sampler;
+import agency.highlysuspect.unfaithful.upscale.sampler.Sampler;
 import agency.highlysuspect.unfaithful.upscale.Upscaler;
 import net.minecraft.client.texture.NativeImage;
 

@@ -1,7 +1,6 @@
 package agency.highlysuspect.unfaithful.mixin;
 
 import agency.highlysuspect.unfaithful.resource.UpscalingResourcePackCreator;
-import net.fabricmc.fabric.impl.resource.loader.ModResourcePackCreator;
 import net.minecraft.client.resource.ClientBuiltinResourcePackProvider;
 import net.minecraft.resource.ResourcePackProfile;
 import org.spongepowered.asm.mixin.Mixin;

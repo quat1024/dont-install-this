@@ -3,22 +3,32 @@ package agency.highlysuspect.unfaithful.mixin;
 import agency.highlysuspect.unfaithful.Init;
 import agency.highlysuspect.unfaithful.resource.ResourceImplExt;
 import agency.highlysuspect.unfaithful.util.NativeImageExt;
-import io.netty.channel.unix.NativeInetAddress;
+import net.minecraft.client.resource.metadata.AnimationResourceMetadata;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.TextureUtil;
 import net.minecraft.resource.ResourceImpl;
+import net.minecraft.resource.metadata.ResourceMetadataReader;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.*;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.Shadow;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 
 @Mixin(ResourceImpl.class)
-public class ResourceImplMixin implements ResourceImplExt {
+public abstract class ResourceImplMixin implements ResourceImplExt {
 	@Shadow @Final @Mutable private InputStream inputStream;
 	@Shadow @Final private Identifier id;
+	
+	@Shadow @Nullable public abstract <T> T getMetadata(ResourceMetadataReader<T> metaReader);
 	
 	@Override
 	public void upscaleMe() {
@@ -31,8 +41,11 @@ public class ResourceImplMixin implements ResourceImplExt {
 			buf.rewind();
 			NativeImage unscaledImage = NativeImage.read(buf);
 			
+			//Grab animation metadata, if there is any
+			@Nullable AnimationResourceMetadata arm = getMetadata(AnimationResourceMetadata.READER);
+			
 			//Perform the upscaling algorithm on the image.
-			NativeImage scaledImage = Init.config.upscaler.upscale(unscaledImage, id);
+			NativeImage scaledImage = Init.config.upscaler.upscale(unscaledImage, id, arm);
 			unscaledImage.close();
 			
 			//Write the upscaled image to a byte array? I guess this works?

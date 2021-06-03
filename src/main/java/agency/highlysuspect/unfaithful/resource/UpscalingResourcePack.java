@@ -2,8 +2,6 @@ package agency.highlysuspect.unfaithful.resource;
 
 import agency.highlysuspect.unfaithful.Init;
 import com.google.common.collect.ImmutableSet;
-import com.google.gson.JsonObject;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.AbstractFileResourcePack;
 import net.minecraft.resource.ResourcePack;
 import net.minecraft.resource.ResourceType;
@@ -11,7 +9,9 @@ import net.minecraft.resource.metadata.ResourceMetadataReader;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
