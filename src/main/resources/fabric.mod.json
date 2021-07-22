@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "unfaithful",
+  "id": "dont-install-this",
   "version": "${version}",
 
-  "name": "Unfaithful",
-  "description": "Automatically upscales textures",
+  "name": "dont install this",
+  "description": "Do not install this mod",
   "authors": [
-    "quaternary", "asiekierka"
+    "quaternary", "apologies to Dropoff"
   ],
   "contact": {
     "homepage": "https://highlysuspect.agency/"
@@ -18,11 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "agency.highlysuspect.unfaithful.Init"
+      "agency.highlysuspect.dontinstallthis.Init"
     ]
   },
   "mixins": [
-    "unfaithful.mixins.json"
+    "dont-install-this.mixins.json"
   ],
 
   "depends": {

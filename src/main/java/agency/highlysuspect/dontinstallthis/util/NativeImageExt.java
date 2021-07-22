@@ -1,4 +1,4 @@
-package agency.highlysuspect.unfaithful.util;
+package agency.highlysuspect.dontinstallthis.util;
 
 import net.minecraft.client.texture.NativeImage;
 

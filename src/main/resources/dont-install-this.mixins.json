@@ -1,11 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "agency.highlysuspect.unfaithful.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "package": "agency.highlysuspect.dontinstallthis.mixin",
+  "compatibilityLevel": "JAVA_16",
   "client": [
-		"ClientBuiltinResourcePackProviderMixin",
-		"ReloadableResourceManagerImplMixin",
 		"NamespaceResourceManagerMixin",
 		"ResourceImplMixin",
 		"NativeImageMixin"

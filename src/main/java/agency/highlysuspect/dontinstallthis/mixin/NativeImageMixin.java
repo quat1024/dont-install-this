@@ -1,6 +1,6 @@
-package agency.highlysuspect.unfaithful.mixin;
+package agency.highlysuspect.dontinstallthis.mixin;
 
-import agency.highlysuspect.unfaithful.util.NativeImageExt;
+import agency.highlysuspect.dontinstallthis.util.NativeImageExt;
 import net.minecraft.client.texture.NativeImage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
