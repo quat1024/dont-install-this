@@ -48,37 +48,32 @@ public abstract class ResourceImplMixin implements ResourceImplExt {
 			buf.rewind();
 			NativeImage original = NativeImage.read(buf);
 			
-			//Grab animation metadata, if there is any
-			@Nullable AnimationResourceMetadata originalArm = getMetadata(AnimationResourceMetadata.READER);
+			NativeImage scrolling = original;
+			@Nullable JsonObject armJson = null;
 			
-			NativeImage scrolling;
-			@Nullable JsonObject armJson;
-			if(originalArm != null) {
-				//TODO: animated textures
-				scrolling = original;
-				armJson = null;
-			} else {
-				Pair<NativeImage, JsonObject> pair = produceScrollingImage(original, originalArm);
-				scrolling = pair.getFirst();
-				armJson = pair.getSecond();
-				
-				original.close();
+			//If the image is small enough & a reasonable pixel format
+			if(original.getFormat() == NativeImage.Format.ABGR && original.getWidth() * original.getHeight() < 64 * 64) {
+				//Grab animation metadata, if there is any
+				@Nullable AnimationResourceMetadata originalArm = getMetadata(AnimationResourceMetadata.READER);
+				if(originalArm == null) {
+					Pair<NativeImage, JsonObject> pair = produceScrollingImage(original, originalArm);
+					scrolling = pair.getFirst();
+					armJson = pair.getSecond();
+					
+					original.close();
+				} //TODO animated textures
 			}
 			
-			//Write the upscaled image to a byte array? I guess this works?
+			//Turn around and replace the original input stream with this one containing the epic png
 			byte[] upscaledBytes;
-			
-			try(ByteArrayOutputStream out = new ByteArrayOutputStream();
-				WritableByteChannel byteWrite = Channels.newChannel(out)) {
+			try(ByteArrayOutputStream out = new ByteArrayOutputStream(); WritableByteChannel byteWrite = Channels.newChannel(out)) {
 				NativeImageExt.cast(scrolling).writeButItsPublic(byteWrite);
 				upscaledBytes = out.toByteArray();
 			}
-			
-			//Turn around and replace the original input stream with this one containing the upscaled PNG
 			inputStream = new ByteArrayInputStream(upscaledBytes);
 			scrolling.close();
 			
-			//hack to force it to read metadata lolol
+			//Dont mind me
 			epicAnimationBlock = armJson;
 		} catch (IOException e) {
 			throw new RuntimeException("Problem doing the thing", e);
@@ -106,7 +101,7 @@ public abstract class ResourceImplMixin implements ResourceImplExt {
 		}
 		
 		JsonObject animation = new JsonObject();
-		animation.addProperty("frametime", 3);
+		animation.addProperty("frametime", 1);
 		
 //		AnimationResourceMetadata arm = new AnimationResourceMetadata(
 //			IntStream.range(0, frameCount).mapToObj(AnimationFrameResourceMetadata::new).collect(Collectors.toList()), //frames - all default frametimes here

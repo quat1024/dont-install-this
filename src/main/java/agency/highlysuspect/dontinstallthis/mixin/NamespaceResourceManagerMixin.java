@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class NamespaceResourceManagerMixin {
 	@Inject(method = "getResource", at = @At(value = "RETURN"))
 	private void heckResource(Identifier id, CallbackInfoReturnable<Resource> cir) {
-		if(id.getPath().startsWith("textures/block")) {
+		if(id.getPath().startsWith("textures") && id.getPath().endsWith(".png")) {
 			((ResourceImplExt) cir.getReturnValue()).ohNo();
 		}
 	}
